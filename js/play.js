@@ -2,6 +2,9 @@
 var level1 = new Level();
 var player1 = new Player();
 var canvas1 = new Canvas(document.getElementById('canvas'));
+var slideshowAudioCtx = new AudioContext;
+var slideshowOscillator = slideshowAudioCtx.createOscillator();
+slideshowOscillator.start(0);
 giveControls(player1);
 player1.centreOnCanvas(canvas1);
 
