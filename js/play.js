@@ -5,6 +5,9 @@ var canvas1 = new Canvas(document.getElementById('canvas'));
 var slideshowAudioCtx = new AudioContext;
 var slideshowOscillator = slideshowAudioCtx.createOscillator();
 slideshowOscillator.start(0);
+slideshowOscillator.frequency.value = 200;
+slideshowOscillator.connect(slideshowAudioCtx.destination);
+
 giveControls(player1);
 player1.centreOnCanvas(canvas1);
 
