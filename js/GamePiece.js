@@ -3,6 +3,7 @@ const directions = [0,90,180,270];
 
 class GamePiece {
     constructor(grid) {
+    this.grid = grid;
     this.x = grid.randomSpot().x;
     this.y = grid.randomSpot().y;
     this.width = 10;
@@ -50,31 +51,33 @@ class GamePiece {
     this.checkWall = (canvas) => {
         if(this.x + this.width > canvas.ctx.canvas.width){
             this.x=0;
-            return "hitRight";
         }
         else if(this.x < 0){
             this.x=canvas.ctx.canvas.width-this.width;
-            return "hitLeft";
         }
         else if(this.y + this.height > canvas.ctx.canvas.height){
             this.y=0;
-            return "hitBottom"
         }
         else if(this.y < 0){
             this.y = canvas.ctx.canvas.height - this.height;
-            return "hitTop";
         }
     }
 
     this.checkCollision = (gamePieces) => {
-    gamePieces.forEach(piece=>{
-    let xAxisIntersect = this.x+this.width>piece.x && this.x+this.width<piece.x+piece.width;
-    let yAxisIntersect = this.y+this.height>piece.y && this.y+this.height<piece.y+piece.height;
+    gamePieces.filter((x,i)=>i!=0).forEach((piece)=>{
+       let xAxisIntersect = this.x+this.width>piece.x && this.x<piece.x+piece.width;
+    let yAxisIntersect = this.y+this.height>piece.y && this.y<piece.y+piece.height;
     if(xAxisIntersect && yAxisIntersect) {
-        alert("boom")
-        console.log(Object.prototype.toString.call(this),"collides",Object.prototype.toString.call(piece));
+        piece.destroy();
+        console.log(Object.prototype.toString.call(piece));
     }
 })
+    }
+
+    this.destroy = () => {
+    this.grid.clearRectangle(this)
+    this.x = grid.randomSpot().x;
+    this.y = grid.randomSpot().y;
     }
 
 }

@@ -32,11 +32,6 @@ class Grid {
       this.ctx.stroke()
 	}
 
-	this.drawLoss = (x) => {
-		this.ctx.font = "5px Arial"
-		this.ctx.fillText("lose",Math.round(Math.random()*window.innerWidth) + 1,Math.round(Math.random()*window.innerHeight) + 1)
-	}
-
 	this.centreSpot = () => {
 		let midX = this.ctx.canvas.width / 2;
         let midY = this.ctx.canvas.height / 2; 
@@ -48,5 +43,11 @@ class Grid {
 		let randY = Math.floor((Math.random() * this.ctx.canvas.height) + 1)
 		return {x:randX,y:randY}
 	}
+
+	this.drawLoss = (x) => {
+		this.ctx.font = "15px Arial"
+		this.ctx.fillText("collision!",this.randomSpot().x, this.randomSpot().y)
+	}
+
   }
 }

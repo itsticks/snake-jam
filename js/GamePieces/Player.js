@@ -5,16 +5,16 @@ class Player extends GamePiece {
     window.onkeydown = (e) => {
         switch(e.keyCode) {
             case 37:
-                player.direction = 270;
+                this.direction = 270;
                 break;
             case 38:
-                player.direction = 180;
+                this.direction = 180;
                 break;
             case 39:
-                player.direction = 90;
+                this.direction = 90;
                 break;
             case 40:
-                player.direction = 0;
+                this.direction = 0;
                 break;
         }
     }

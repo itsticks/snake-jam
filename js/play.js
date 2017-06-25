@@ -1,57 +1,48 @@
-//(function(){
 var counter = 0;
 var grid = new Grid(document.getElementById('canvas'));
 var gamePieces = new Array();
 
-var player = new Player(grid);
-player.x = grid.centreSpot().x;
-player.y = grid.centreSpot().y;
+gamePieces['player'] = new Player(grid);
+gamePieces['player'].x = grid.centreSpot().x;
+gamePieces['player'].y = grid.centreSpot().y;
 
-player.control();
-gamePieces.push(player);
+gamePieces['player'].control();
 
-var square = new Square(grid);
-square.direction = 180;
-gamePieces.push(square);
+gamePieces['square'] = new Square(grid);
+gamePieces['square'].direction = 180;
 
-var circle = new Circle(grid);
-circle.direction = 90;
-gamePieces.push(circle);
+gamePieces['circle'] = new Circle(grid);
+gamePieces['circle'].direction = 90;
 
-var triangle = new Triangle(grid);
-triangle.direction = 270;
-gamePieces.push(triangle);
+gamePieces['triangle'] = new Triangle(grid);
+gamePieces['triangle'].direction = 270;
 
 var update = () => {
 	counter++;
-	gamePieces.forEach(piece=>{
-		piece.checkCollision(gamePieces);
-	});
-
-	grid.clearRectangle(player);
-	player.forward();
-	grid.drawRectangle(player);
-	player.checkWall(grid);
+	gamePieces['player'].checkCollision(gamePieces);
+	grid.clearRectangle(gamePieces['player']);
+	gamePieces['player'].forward();
+	grid.drawRectangle(gamePieces['player']);
+	gamePieces['player'].checkWall(grid);
 	if(counter%70==0){
-    	grid.clearRectangle(triangle);
-		triangle.forward();
-    	grid.drawTriangle(triangle);
-    	triangle.checkWall(grid);
+    	grid.clearRectangle(gamePieces['triangle']);
+		gamePieces['triangle'].forward();
+    	grid.drawTriangle(gamePieces['triangle']);
+    	gamePieces['triangle'].checkWall(grid);
 	}
 	if(counter%40==0){
-		grid.clearRectangle(circle);
-		circle.forward();
-    	grid.drawCircle(circle);
-    	circle.checkWall(grid);
+		grid.clearRectangle(gamePieces['circle']);
+		gamePieces['circle'].forward();
+    	grid.drawCircle(gamePieces['circle']);
+    	gamePieces['circle'].checkWall(grid);
 	}
 	if(counter%10==0){
-		grid.clearRectangle(square);
-		square.forward();
-    	grid.drawRectangle(square);
-    	square.checkWall(grid);
-	}      
+		grid.clearRectangle(gamePieces['square']);
+		gamePieces['square'].forward();
+    	grid.drawRectangle(gamePieces['square']);
+    	gamePieces['square'].checkWall(grid);
+	}
     window.requestAnimationFrame(update);
 }
 
 window.requestAnimationFrame(update);
-//})();
