@@ -1,16 +1,24 @@
 const speeds = [0,1,2,3,4,5,6,7,8,9];
 const directions = [0,90,180,270];
-const gridCellSquarePixels = 10;
 
 class GamePiece {
-    constructor(x, y, width, height, color) {
-    this.x = x || gridCellSquarePixels;
-    this.y = y || gridCellSquarePixels;
-    this.width = width || 10;
-    this.height = height || 10;
+    constructor(grid) {
+    this.x = grid.randomSpot().x;
+    this.y = grid.randomSpot().y;
+    this.width = 10;
+    this.height = 10;
     this.color = '#ffffff';
     this.direction = directions[0];
     this.speed = speeds[0];
+
+    this.audioCtx = new AudioContext;
+    this.gain = this.audioCtx.createGain();
+    this.gain.gain.value = 0.005;
+    this.oscillator = this.audioCtx.createOscillator();
+    this.oscillator.start(0);
+    this.oscillator.frequency.value = this.y;
+    this.oscillator.connect(this.gain)
+    this.gain.connect(this.audioCtx.destination);  
 
     this.forward = () => {
         switch(this.direction) {
@@ -56,6 +64,17 @@ class GamePiece {
             this.y = canvas.ctx.canvas.height - this.height;
             return "hitTop";
         }
+    }
+
+    this.checkCollision = (gamePieces) => {
+    gamePieces.forEach(piece=>{
+    let xAxisIntersect = this.x+this.width>piece.x && this.x+this.width<piece.x+piece.width;
+    let yAxisIntersect = this.y+this.height>piece.y && this.y+this.height<piece.y+piece.height;
+    if(xAxisIntersect && yAxisIntersect) {
+        alert("boom")
+        console.log(Object.prototype.toString.call(this),"collides",Object.prototype.toString.call(piece));
+    }
+})
     }
 
 }

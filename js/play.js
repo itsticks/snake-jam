@@ -1,31 +1,54 @@
 //(function(){
 var counter = 0;
-var level1 = new Level();
-var player1 = new Player();
-var canvas1 = new Canvas(document.getElementById('canvas'));
-giveControls(player1);
+var grid = new Grid(document.getElementById('canvas'));
+var gamePieces = new Array();
 
-player1.centreOnCanvas(canvas1);
+var player = new Player(grid);
+player.x = grid.centreSpot().x;
+player.y = grid.centreSpot().y;
+
+player.control();
+gamePieces.push(player);
+
+var square = new Square(grid);
+square.direction = 180;
+gamePieces.push(square);
+
+var circle = new Circle(grid);
+circle.direction = 90;
+gamePieces.push(circle);
+
+var triangle = new Triangle(grid);
+triangle.direction = 270;
+gamePieces.push(triangle);
 
 var update = () => {
 	counter++;
-	var randX = Math.floor((Math.random() * canvas1.ctx.canvas.width) + 1);
-	var randY = Math.floor((Math.random() * canvas1.ctx.canvas.height) + 1);
-	canvas1.clearRectangle(player1);
-	player1.forward();
-	canvas1.drawRectangle(player1);
-	player1.checkWall(canvas1);
+	gamePieces.forEach(piece=>{
+		piece.checkCollision(gamePieces);
+	});
+
+	grid.clearRectangle(player);
+	player.forward();
+	grid.drawRectangle(player);
+	player.checkWall(grid);
 	if(counter%70==0){
-		var triangle = new Triangle(randX,randY);
-    	canvas1.drawTriangle(triangle);
+    	grid.clearRectangle(triangle);
+		triangle.forward();
+    	grid.drawTriangle(triangle);
+    	triangle.checkWall(grid);
 	}
 	if(counter%40==0){
-		var circle = new Circle(randX,randY);
-    	canvas1.drawCircle(circle);
+		grid.clearRectangle(circle);
+		circle.forward();
+    	grid.drawCircle(circle);
+    	circle.checkWall(grid);
 	}
-	if(counter%100==0){
-		var square = new Square(randX,randY);
-    	canvas1.drawRectangle(square);
+	if(counter%10==0){
+		grid.clearRectangle(square);
+		square.forward();
+    	grid.drawRectangle(square);
+    	square.checkWall(grid);
 	}      
     window.requestAnimationFrame(update);
 }

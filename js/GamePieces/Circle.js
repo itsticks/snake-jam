@@ -1,8 +1,6 @@
 class Circle extends GamePiece {
-    constructor(x,y){
-    super();
-    this.x = x;
-    this.y = y;
+    constructor(grid){
+    super(grid);
     this.color="#550055";
 }
 }

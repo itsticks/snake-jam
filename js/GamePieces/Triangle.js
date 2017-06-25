@@ -1,8 +1,6 @@
 class Triangle extends GamePiece {
-    constructor(x,y) {
-    super();
-    this.x = x;
-    this.y = y;
+    constructor(grid) {
+    super(grid);
     this.color="#ee4400";
 }
 }
