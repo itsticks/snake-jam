@@ -1,4 +1,3 @@
-const speeds = [0,1,2,3,4,5,6,7,8,9];
 const directions = [0,90,180,270];
 
 class GamePiece {
@@ -10,7 +9,7 @@ class GamePiece {
     this.height = 10;
     this.color = '#ffffff';
     this.direction = directions[0];
-    this.speed = speeds[0];
+    this.speed = 4;
 
     this.audioCtx = new AudioContext;
     this.gain = this.audioCtx.createGain();
@@ -43,11 +42,6 @@ class GamePiece {
         this.oscillator.frequency.value = this.y;
     }
 
-    this.centreOnCanvas = (canvas) => {
-        this.x = canvas.ctx.canvas.width / 2;
-        this.y = canvas.ctx.canvas.height / 2; 
-    }
-
     this.checkWall = (canvas) => {
         if(this.x + this.width > canvas.ctx.canvas.width){
             this.x=0;
@@ -64,17 +58,23 @@ class GamePiece {
     }
 
     this.hasCollided = (piece) => {
+    let topLeftIntersect = this.x > piece.x && this.x < piece.x + piece.width && this.y > piece.y && this.y < piece.y + piece.height;
+    let topRightIntersect = this.x + this.width > piece.x && this.x + this.width < piece.x + piece.width && this.y > piece.y && this.y < piece.y + piece.height;
+
     let xAxisIntersect = this.x>piece.x && this.x<piece.x+piece.width;
     let yAxisIntersect = this.y>piece.y && this.y<piece.y+piece.height;
     let xAxisIntersect2 = this.x<piece.x && this.x+this.width>piece.x;
     let yAxisIntersect2 = this.y<piece.y && this.y+this.height>piece.y;
-     return (xAxisIntersect && yAxisIntersect) || (xAxisIntersect2 && yAxisIntersect2)
+     return (xAxisIntersect && yAxisIntersect) || (xAxisIntersect2 && yAxisIntersect2) || topLeftIntersect || topRightIntersect
     }
 
-    this.destroy = () => {
-    this.grid.clearRectangle(this)
-    this.x = grid.randomSpot().x;
-    this.y = grid.randomSpot().y;
+    this.drawMe = (grid) => {
+        grid.ctx.fillStyle = this.color; 
+        grid.ctx.fillRect(this.x,this.y,this.width,this.height)
+    }
+
+    this.clearMe = (grid) => {
+        grid.ctx.clearRect(this.x-1,this.y-1,this.width+2,this.height+2)
     }
 
 }
