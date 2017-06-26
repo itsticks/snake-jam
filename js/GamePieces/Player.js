@@ -1,6 +1,7 @@
 class Player extends GamePiece {
     constructor(grid) {
     super(grid);
+    this.gain.gain.value = 0.025;
     this.control = () => {
     window.onkeydown = (e) => {
         switch(e.keyCode) {
