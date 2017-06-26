@@ -22,7 +22,6 @@ var update = () => {
 		if(count%x.speed==0){
 			x.clearMe(grid);
 	        x.forward();
-	        x.checkWall(grid);
 	        if(x!=gamePieces[0] && gamePieces[0].hasCollided(x)){
 				x.x = grid.randomSpot().x;
 				x.y = grid.randomSpot().y;

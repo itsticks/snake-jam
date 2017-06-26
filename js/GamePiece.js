@@ -39,6 +39,7 @@ class GamePiece {
             this.oscillator.type = 'sawtooth';
             break;
         }
+        this.checkWall(grid);
         this.oscillator.frequency.value = this.y;
     }
 
