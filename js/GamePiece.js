@@ -63,15 +63,12 @@ class GamePiece {
         }
     }
 
-    this.checkCollision = (gamePieces) => {
-    gamePieces.filter((x,i)=>i!=0).forEach((piece)=>{
-       let xAxisIntersect = this.x+this.width>piece.x && this.x<piece.x+piece.width;
-    let yAxisIntersect = this.y+this.height>piece.y && this.y<piece.y+piece.height;
-    if(xAxisIntersect && yAxisIntersect) {
-        piece.destroy();
-        console.log(Object.prototype.toString.call(piece));
-    }
-})
+    this.hasCollided = (piece) => {
+    let xAxisIntersect = this.x>piece.x && this.x<piece.x+piece.width;
+    let yAxisIntersect = this.y>piece.y && this.y<piece.y+piece.height;
+    let xAxisIntersect2 = this.x<piece.x && this.x+this.width>piece.x;
+    let yAxisIntersect2 = this.y<piece.y && this.y+this.height>piece.y;
+     return (xAxisIntersect && yAxisIntersect) || (xAxisIntersect2 && yAxisIntersect2)
     }
 
     this.destroy = () => {

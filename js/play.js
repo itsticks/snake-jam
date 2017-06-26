@@ -19,7 +19,7 @@ gamePieces['triangle'].direction = 270;
 
 var update = () => {
 	counter++;
-	gamePieces['player'].checkCollision(gamePieces);
+
 	grid.clearRectangle(gamePieces['player']);
 	gamePieces['player'].forward();
 	grid.drawRectangle(gamePieces['player']);
@@ -42,6 +42,18 @@ var update = () => {
     	grid.drawRectangle(gamePieces['square']);
     	gamePieces['square'].checkWall(grid);
 	}
+
+	for(var key in gamePieces){
+		if(key!="player"){
+		let collided = gamePieces['player'].hasCollided(gamePieces[key])
+		if(collided){
+			gamePieces[key].x = grid.randomSpot().x;
+			gamePieces[key].y = grid.randomSpot().y;
+		}
+	}
+	}
+	
+
     window.requestAnimationFrame(update);
 }
 
