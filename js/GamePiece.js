@@ -62,11 +62,15 @@ class GamePiece {
     let topLeftIntersect = this.x > piece.x && this.x < piece.x + piece.width && this.y > piece.y && this.y < piece.y + piece.height;
     let topRightIntersect = this.x + this.width > piece.x && this.x + this.width < piece.x + piece.width && this.y > piece.y && this.y < piece.y + piece.height;
 
+    let bottomLeftIntersect = this.x + this.height > piece.x && this.x+this.height < piece.x + piece.width && this.y > piece.y && this.y < piece.y + piece.height;
+
+    let bottomRightIntersect = this.x + this.height + this.width > piece.x ;
+
     let xAxisIntersect = this.x>piece.x && this.x<piece.x+piece.width;
     let yAxisIntersect = this.y>piece.y && this.y<piece.y+piece.height;
     let xAxisIntersect2 = this.x<piece.x && this.x+this.width>piece.x;
     let yAxisIntersect2 = this.y<piece.y && this.y+this.height>piece.y;
-     return (xAxisIntersect && yAxisIntersect) || (xAxisIntersect2 && yAxisIntersect2) || topLeftIntersect || topRightIntersect
+     return ( topLeftIntersect || topRightIntersect || bottomLeftIntersect || bottomRightIntersect)
     }
 
     this.drawMe = (grid) => {
