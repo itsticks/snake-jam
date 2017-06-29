@@ -1,11 +1,3 @@
-const directions = [0,90,180,270];
-
-class RandomIndex{
-    constructor(limit){
-        return Math.round(Math.random()*(directions.length-1)+1);
-    }
-}
-
 class GamePiece {
     constructor(grid) {
     this.grid = grid;
@@ -14,7 +6,7 @@ class GamePiece {
     this.width = 10;
     this.height = 10;
     this.color = '#ffffff';
-    this.direction = new RandomIndex(3);
+    this.direction = 0;
     this.speed = 4;
 
     this.audioCtx = new AudioContext;
