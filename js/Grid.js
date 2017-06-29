@@ -24,7 +24,7 @@ class Grid {
 
 	this.drawScore = (x) => {
 		this.ctx.font = "25px Arial"
-		this.ctx.clearRect(this.x-1,this.y-1,50,50)
+		this.ctx.clearRect(this.centreSpot().x,this.centreSpot().y,150,150)
 		this.ctx.fillText(x,this.centreSpot().x, this.centreSpot().y)
 	}
 

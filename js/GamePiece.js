@@ -1,5 +1,11 @@
 const directions = [0,90,180,270];
 
+class RandomIndex{
+    constructor(limit){
+        return Math.round(Math.random()*(directions.length-1)+1);
+    }
+}
+
 class GamePiece {
     constructor(grid) {
     this.grid = grid;
@@ -8,7 +14,7 @@ class GamePiece {
     this.width = 10;
     this.height = 10;
     this.color = '#ffffff';
-    this.direction = directions[0];
+    this.direction = new RandomIndex(3);
     this.speed = 4;
 
     this.audioCtx = new AudioContext;
@@ -59,28 +65,43 @@ class GamePiece {
     }
 
     this.hasCollided = (piece) => {
-    let topLeftIntersect = this.x > piece.x && this.x < piece.x + piece.width && this.y > piece.y && this.y < piece.y + piece.height;
-    let topRightIntersect = this.x + this.width > piece.x && this.x + this.width < piece.x + piece.width && this.y > piece.y && this.y < piece.y + piece.height;
-
-    let bottomLeftIntersect = this.x + this.height > piece.x && this.x+this.height < piece.x + piece.width && this.y > piece.y && this.y < piece.y + piece.height;
-
-    let bottomRightIntersect = this.x + this.height + this.width > piece.x ;
-
-    let xAxisIntersect = this.x>piece.x && this.x<piece.x+piece.width;
-    let yAxisIntersect = this.y>piece.y && this.y<piece.y+piece.height;
-    let xAxisIntersect2 = this.x<piece.x && this.x+this.width>piece.x;
-    let yAxisIntersect2 = this.y<piece.y && this.y+this.height>piece.y;
-     return ( topLeftIntersect || topRightIntersect || bottomLeftIntersect || bottomRightIntersect)
+        let r1Top = this.y, r1Right = this.x + this.width, r1Bottom = this.y+this.height, r1Left = this.x;
+        let r2Top = piece.y, r2Right = piece.x + piece.width, r2Bottom = piece.y + piece.height, r2Left = piece.x; 
+        return !(r2Left > r1Right || r2Right < r1Left || r2Top > r1Bottom || r2Bottom < r1Top)
     }
 
     this.drawMe = (grid) => {
-        grid.ctx.fillStyle = this.color; 
-        grid.ctx.fillRect(this.x,this.y,this.width,this.height)
+      grid.ctx.beginPath()
+      grid.ctx.arc(this.x+(this.width/2), this.y+(this.height/2), this.width/2, 0, 2 * Math.PI, false)
+      grid.ctx.fillStyle = this.color
+      grid.ctx.fill()
+      grid.ctx.lineWidth = 1
+      grid.ctx.strokeStyle = 'this.color'
+      grid.ctx.stroke()
     }
 
     this.clearMe = (grid) => {
         grid.ctx.clearRect(this.x-1,this.y-1,this.width+2,this.height+2)
     }
+
+    this.control = () => {
+        window.onkeydown = (e) => {
+            switch(e.keyCode) {
+                case 37:
+                    this.direction = 270;
+                    break;
+                case 38:
+                    this.direction = 180;
+                    break;
+                case 39:
+                    this.direction = 90;
+                    break;
+                case 40:
+                    this.direction = 0;
+                    break;
+        }
+    }
+}
 
 }
 }

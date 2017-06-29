@@ -8,13 +8,9 @@ gamePieces[0].y = grid.centreSpot().y;
 gamePieces[0].control();
 
 gamePieces.push(new Square(grid));
-gamePieces[1].direction = 180;
-
 gamePieces.push(new Circle(grid));
-gamePieces[2].direction = 90;
-
 gamePieces.push(new Triangle(grid));
-gamePieces[3].direction = 270;
+
 
 var update = () => {
 	count++;
