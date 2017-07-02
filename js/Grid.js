@@ -17,14 +17,9 @@ class Grid {
 		return {x:randX,y:randY}
 	}
 
-	this.drawLoss = (x) => {
-		this.ctx.font = "15px Arial"
-		this.ctx.fillText("collision!",this.randomSpot().x, this.randomSpot().y)
-	}
-
 	this.drawScore = (x) => {
 		this.ctx.font = "25px Arial"
-		this.ctx.clearRect(this.centreSpot().x,this.centreSpot().y,150,150)
+		this.ctx.clearRect(this.centreSpot().x-50,this.centreSpot().y-50,150,50)
 		this.ctx.fillText(x,this.centreSpot().x, this.centreSpot().y)
 	}
 
