@@ -19,7 +19,8 @@ var update = () => {
 	        	if(x.harmful){
 	        		points = 0;
 				    grid.drawScore("you died!");
-				    setTimeout(()=>window.location.href = window.location.href,1000);
+				    canvas.style["background-color"] = "white"
+				    setTimeout(()=>window.location.href = window.location.href,2000);
 				}
 				else{
 				    points = points + 10;
