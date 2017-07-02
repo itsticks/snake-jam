@@ -21,6 +21,14 @@ class Grid {
 		this.ctx.clearRect(this.centreSpot().x-50,this.centreSpot().y-50,150,50)
 		this.ctx.fillText(x,this.centreSpot().x, this.centreSpot().y)
 	}
+		this.drawRecordScore = (x) => {
+		let score = localStorage.highScore!=null && parseInt(localStorage.highScore) > x ? localStorage.highScore : x;  
+		localStorage.highScore = score;
+		this.ctx.font = "25px Arial"
+		this.ctx.clearRect(0,0,300,300)
+		this.ctx.fillText("Record Score: "+score,50, 50)
+	}
+
 
   }
 }

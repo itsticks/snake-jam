@@ -29,9 +29,9 @@ var update = () => {
 				    gamePieces[gamePieces.length-1].direction = randomItem(directions);
 				    gamePieces[gamePieces.length-1].speed = randomItem(speeds);
 				    grid.drawScore(points);
+				    grid.drawRecordScore(points);
 				}
-				// gamePieces[0].color = x.color;
-				// x.color = currentColor;
+
 				gamePieces[0].changeShape(x.shape);
 				x.changeShape(currentShape);
 	
@@ -42,6 +42,7 @@ var update = () => {
 
 		    }	
 	        x.drawMe(grid);
+	        //grid.drawScore(points);
 	    });
 	window.requestAnimationFrame(update)//,
 	count++;
