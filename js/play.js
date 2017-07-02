@@ -18,7 +18,7 @@ var update = () => {
 	        	let currentColor = gamePieces[0].color;
 	        	if(x.harmful){
 	        		points = 0;
-				    grid.drawScore("you died!");
+				    grid.drawScore("game over");
 				    canvas.style["background-color"] = "white"
 				    setTimeout(()=>window.location.href = window.location.href,2000);
 				}
