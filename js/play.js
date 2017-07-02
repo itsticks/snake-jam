@@ -24,6 +24,7 @@ var update = () => {
 				}
 				else{
 				    points = points + 10;
+				    gamePieces[0].speed = gamePieces[0].speed + 1;
 				    gamePieces.push(new Sawtooth(grid));
 				    gamePieces[gamePieces.length-1].direction = randomItem(directions);
 				    gamePieces[gamePieces.length-1].speed = randomItem(speeds);
