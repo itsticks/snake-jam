@@ -1,6 +1,5 @@
 class Grid {
   constructor(canvasElement) {
-	
 	this.ctx = canvasElement.getContext('2d')
 	this.ctx.canvas.width = window.innerWidth
 	this.ctx.canvas.height = window.innerHeight

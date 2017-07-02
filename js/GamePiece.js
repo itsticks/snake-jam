@@ -1,26 +1,33 @@
+    var audioCtx = new AudioContext;
+    var gain = audioCtx.createGain();
+    gain.gain.value = 0.02;
+
 class GamePiece {
     constructor(grid) {
     this.grid = grid;
+    this.harmful = false;
     this.x = grid.randomSpot().x;
     this.y = grid.randomSpot().y;
     this.width = 10;
     this.height = 10;
     this.color = '#ffffff';
+    this.originalColor = '#ffffff';
     this.shape = "circle";
     this.direction = 0;
     this.speed = 4;
     this.volume = 0.01;
-    this.audioCtx = new AudioContext;
-    this.gain = this.audioCtx.createGain();
-    this.gain.gain.value = this.volume;
-    this.oscillator = this.audioCtx.createOscillator();
+    // this.audioCtx = new AudioContext;
+    // this.gain = this.audioCtx.createGain();
+    // this.gain.gain.value = this.volume;
+    this.oscillator = audioCtx.createOscillator();
     this.oscillator.start(0);
     this.oscillator.frequency.value = this.y;
-    this.oscillator.connect(this.gain)
-    this.gain.connect(this.audioCtx.destination);  
+    this.oscillator.connect(gain)
+    gain.connect(audioCtx.destination);  
 
     this.pulse = () => {
-        this.gain.gain.value = this.gain.gain.value == 0 ? this.volume : 0
+        gain.gain.value = gain.gain.value == 0 ? this.volume : 0
+        this.color = this.color == "white" ? this.originalColor : "white";
     }
 
     this.forward = () => {

@@ -1,31 +1,43 @@
 const grid = new Grid(document.getElementById('canvas'));
 const gamePieces = new Array();
 const directions = [0,90,180,270];
+const speeds = [2,4,8];
 var points = 0, count = 0;
 
-function randomDirection() {
-        let i = Math.round(Math.random()*(directions.length)+1)-1;
-        grid.drawScore(directions[i]);
-    	return directions[i]
+function randomItem(array) {
+    	return array[Math.floor(Math.random()*array.length)]
 }
 
 var update = () => {
 	gamePieces.forEach(x=>{
 			x.clearMe(grid);
 	        x.forward();
-	        if(count%(10-x.speed)*2===0){x.pulse()}
+	        if(count%(10-x.speed)===0&&x.harmful){x.pulse()}
 	        if(x!=gamePieces[0] && gamePieces[0].hasCollided(x)){
 	        	let currentShape = gamePieces[0].shape;
 	        	let currentColor = gamePieces[0].color;
-				gamePieces[0].color = x.color;
+	        	if(x.harmful){
+	        		points = 0;
+				    grid.drawScore("you died!");
+				    setTimeout(()=>window.location.href = window.location.href,1000);
+				}
+				else{
+				    points = points + 10;
+				    gamePieces.push(new Sawtooth(grid));
+				    gamePieces[gamePieces.length-1].direction = randomItem(directions);
+				    gamePieces[gamePieces.length-1].speed = randomItem(speeds);
+				    grid.drawScore(points);
+				}
+				// gamePieces[0].color = x.color;
+				// x.color = currentColor;
 				gamePieces[0].changeShape(x.shape);
 				x.changeShape(currentShape);
-				x.color = currentColor;
+	
 				x.x = grid.randomSpot().x;
 				x.y = grid.randomSpot().y;
-				x.direction = randomDirection();
-				points = points + 10
-				grid.drawScore(points);
+				x.direction = randomItem(directions);
+				x.speed = randomItem(speeds)
+
 		    }	
 	        x.drawMe(grid);
 	    });
@@ -43,6 +55,9 @@ gamePieces.push(new Square(grid));
 gamePieces.push(new Sawtooth(grid));
 gamePieces.push(new Triangle(grid));
 
-gamePieces.forEach(x=>x.direction = randomDirection())
+gamePieces.filter((x,i)=>i!=0).forEach(x=>{
+	x.direction = randomItem(directions)
+	x.speed = randomItem(speeds)
+})
 
 window.requestAnimationFrame(update);
