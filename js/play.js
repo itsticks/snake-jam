@@ -9,6 +9,7 @@ function randomItem(array) {
 }
 
 var update = () => {
+	if(count==1){grid.drawRecordScore(points);}
 	gamePieces.forEach(x=>{
 			x.clearMe(grid);
 	        x.forward();

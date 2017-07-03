@@ -1,6 +1,20 @@
     var audioCtx = new AudioContext;
-    var gain = audioCtx.createGain();
-    gain.gain.value = 0.02;
+   var gain = audioCtx.createGain();
+   gain.gain.value = 0.02;
+
+function makeDistortionCurve(amount) {
+  var k = typeof amount === 'number' ? amount : 50,
+    n_samples = 44100,
+    curve = new Float32Array(n_samples),
+    deg = Math.PI / 180,
+    i = 0,
+    x;
+  for ( ; i < n_samples; ++i ) {
+    x = i * 2 / n_samples - 1;
+    curve[i] = ( 3 + k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) );
+  }
+  return curve;
+};
 
 class GamePiece {
     constructor(grid) {
@@ -17,13 +31,20 @@ class GamePiece {
     this.speed = 4;
     this.volume = 0.01;
     // this.audioCtx = new AudioContext;
-    // this.gain = this.audioCtx.createGain();
-    // this.gain.gain.value = this.volume;
+    // this.analyser = audioCtx.createAnalyser();
+    // this.biquadFilter = audioCtx.createBiquadFilter();
+    // this.convolver = audioCtx.createConvolver();
+   this.gainNode = audioCtx.createGain();
+    this.gainNode.gain.value = this.volume;
+    this.distortion = audioCtx.createWaveShaper();
+this.distortion.wave = makeDistortionCurve(this.x);
     this.oscillator = audioCtx.createOscillator();
     this.oscillator.start(0);
     this.oscillator.frequency.value = this.y;
-    this.oscillator.connect(gain)
-    gain.connect(audioCtx.destination);  
+  //  this.distortion.connect(this.gainNode);
+    this.oscillator.connect(this.distortion);
+    this.distortion.connect(this.gainNode);
+    this.gainNode.connect(audioCtx.destination);  
 
     this.pulse = () => {
         gain.gain.value = gain.gain.value == 0 ? this.volume : 0
@@ -47,6 +68,7 @@ class GamePiece {
         }
         this.checkWall(grid);
         this.oscillator.frequency.value = this.y;
+        this.distortion.curve = makeDistortionCurve(this.x);
     }
 
     this.checkWall = (canvas) => {
