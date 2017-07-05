@@ -1,4 +1,8 @@
-    var audioCtx = new AudioContext;
+var yDelta, xDelta;
+
+//var normalize = (val,max,min) => (val-min)/(max-min);
+
+var audioCtx = new AudioContext;
    var gain = audioCtx.createGain();
    gain.gain.value = 0.02;
 
@@ -34,10 +38,10 @@ class GamePiece {
     // this.analyser = audioCtx.createAnalyser();
     // this.biquadFilter = audioCtx.createBiquadFilter();
     // this.convolver = audioCtx.createConvolver();
-   this.gainNode = audioCtx.createGain();
+    this.gainNode = audioCtx.createGain();
     this.gainNode.gain.value = this.volume;
     this.distortion = audioCtx.createWaveShaper();
-this.distortion.wave = makeDistortionCurve(this.x);
+    this.distortion.wave = makeDistortionCurve(this.x);
     this.oscillator = audioCtx.createOscillator();
     this.oscillator.start(0);
     this.oscillator.frequency.value = this.y;
@@ -157,6 +161,40 @@ this.distortion.wave = makeDistortionCurve(this.x);
                     break;
         }
     }
+        window.ontouchstart = (e) => {
+            let startTouchX = e.touches[0].clientX;
+            let startTouchY = e.touches[0].clientY;
+            window.ontouchmove = (f) => {
+                 let moveTouchX = f.touches[0].clientX;
+                 let moveTouchY = f.touches[0].clientY;
+                 xDelta = moveTouchX > startTouchX ? moveTouchX - startTouchX : startTouchX - moveTouchX
+                 yDelta = moveTouchY > startTouchY ? moveTouchY - startTouchY : startTouchY - moveTouchY
+                 // direction vector
+                 if(xDelta>yDelta){
+                    // if(xDelta>0){
+                    //     this.direction = 90;
+                    // }
+                    // else {
+                    //     this.direction = 270;
+                    // }
+               if(moveTouchX > startTouchX){
+                    this.direction = 90; 
+               }
+               if(moveTouchX < startTouchX){
+                   this.direction = 270;
+               }
+                 }
+                 else{
+               if(moveTouchY > startTouchY){
+                   this.direction = 0;
+               }
+               if(moveTouchY < startTouchY){
+                   this.direction = 180;
+               }
+                 }
+
+            }
+        }
 }
 
 }
