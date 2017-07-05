@@ -169,28 +169,11 @@ class GamePiece {
                  let moveTouchY = f.touches[0].clientY;
                  xDelta = moveTouchX > startTouchX ? moveTouchX - startTouchX : startTouchX - moveTouchX
                  yDelta = moveTouchY > startTouchY ? moveTouchY - startTouchY : startTouchY - moveTouchY
-                 // direction vector
                  if(xDelta>yDelta){
-                    // if(xDelta>0){
-                    //     this.direction = 90;
-                    // }
-                    // else {
-                    //     this.direction = 270;
-                    // }
-               if(moveTouchX > startTouchX){
-                    this.direction = 90; 
-               }
-               if(moveTouchX < startTouchX){
-                   this.direction = 270;
-               }
+                   this.direction = moveTouchX > startTouchX ? 90 : 270
                  }
                  else{
-               if(moveTouchY > startTouchY){
-                   this.direction = 0;
-               }
-               if(moveTouchY < startTouchY){
-                   this.direction = 180;
-               }
+                   this.direction = moveTouchY > startTouchY ? 0 : 180
                  }
 
             }
