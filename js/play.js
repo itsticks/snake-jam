@@ -1,7 +1,7 @@
 const grid = new Grid(document.getElementById('canvas'));
 const gamePieces = new Array();
 const directions = [0,90,180,270];
-const speeds = [2,4,8];
+const speeds = [1,2,4];
 var points = 0, count = 0;
 
 function randomItem(array) {
@@ -25,7 +25,7 @@ var update = () => {
 				}
 				else{
 				    points = points + 10;
-				    gamePieces[0].speed = gamePieces[0].speed + 1;
+				    gamePieces[0].speed = gamePieces[0].speed + 2;
 				    gamePieces.push(new Sawtooth(grid));
 				    gamePieces[gamePieces.length-1].direction = randomItem(directions);
 				    gamePieces[gamePieces.length-1].speed = randomItem(speeds);

@@ -34,7 +34,7 @@ class GamePiece {
     this.gainNode = audioCtx.createGain();
     this.gainNode.gain.value = this.volume;
     this.distortion = audioCtx.createWaveShaper();
-    this.distortion.wave = makeDistortionCurve(this.x);
+    this.distortion.wave = makeDistortionCurve(this.x*10);
     this.oscillator = audioCtx.createOscillator();
     this.oscillator.start(0);
     this.oscillator.frequency.value = this.y;
@@ -44,7 +44,7 @@ class GamePiece {
 
     this.pulse = () => {
         this.gainNode.gain.value = this.gainNode.gain.value == 0 ? this.volume : 0
-        this.color = this.color == "white" ? this.originalColor : "white";
+        this.color = this.color == "black" ? this.originalColor : "black";
     }
 
     this.forward = () => {
@@ -161,10 +161,10 @@ class GamePiece {
                  let moveTouchY = f.touches[0].clientY;
                  let xDelta = moveTouchX > startTouchX ? moveTouchX - startTouchX : startTouchX - moveTouchX
                  let yDelta = moveTouchY > startTouchY ? moveTouchY - startTouchY : startTouchY - moveTouchY
-                 if(xDelta>yDelta){
+                 if(xDelta>yDelta) {
                    this.direction = moveTouchX > startTouchX ? 90 : 270
                  }
-                 else{
+                 else {
                    this.direction = moveTouchY > startTouchY ? 0 : 180
                  }
                  f.preventDefault();
