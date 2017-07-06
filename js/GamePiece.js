@@ -44,7 +44,7 @@ class GamePiece {
 
     this.pulse = () => {
         this.gainNode.gain.value = this.gainNode.gain.value == 0 ? this.volume : 0
-        this.color = this.color == "black" ? this.originalColor : "black";
+        this.color = this.color == "#9064C3" ? this.originalColor : "#9064C3";
     }
 
     this.forward = () => {
