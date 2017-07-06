@@ -157,7 +157,6 @@ class GamePiece {
             let startTouchX = e.touches[0].clientX;
             let startTouchY = e.touches[0].clientY;
             window.ontouchmove = (f) => {
-                 f.preventDefault();
                  let moveTouchX = f.touches[0].clientX;
                  let moveTouchY = f.touches[0].clientY;
                  xDelta = moveTouchX > startTouchX ? moveTouchX - startTouchX : startTouchX - moveTouchX
@@ -168,7 +167,7 @@ class GamePiece {
                  else{
                    this.direction = moveTouchY > startTouchY ? 0 : 180
                  }
-
+                 f.preventDefault();
             }
         }
 }
