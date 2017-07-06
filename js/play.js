@@ -43,9 +43,8 @@ var update = () => {
 
 		    }	
 	        x.drawMe(grid);
-	        //grid.drawScore(points);
 	    });
-	window.requestAnimationFrame(update)//,
+	window.requestAnimationFrame(update)
 	count++;
 }
 

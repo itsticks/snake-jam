@@ -1,10 +1,4 @@
-var yDelta, xDelta;
-
-//var normalize = (val,max,min) => (val-min)/(max-min);
-
 var audioCtx = new AudioContext;
-   var gain = audioCtx.createGain();
-   gain.gain.value = 0.02;
 
 function makeDistortionCurve(amount) {
   var k = typeof amount === 'number' ? amount : 50,
@@ -34,7 +28,6 @@ class GamePiece {
     this.direction = 0;
     this.speed = 4;
     this.volume = 0.01;
-    // this.audioCtx = new AudioContext;
     // this.analyser = audioCtx.createAnalyser();
     // this.biquadFilter = audioCtx.createBiquadFilter();
     // this.convolver = audioCtx.createConvolver();
@@ -45,13 +38,12 @@ class GamePiece {
     this.oscillator = audioCtx.createOscillator();
     this.oscillator.start(0);
     this.oscillator.frequency.value = this.y;
-  //  this.distortion.connect(this.gainNode);
     this.oscillator.connect(this.distortion);
     this.distortion.connect(this.gainNode);
     this.gainNode.connect(audioCtx.destination);  
 
     this.pulse = () => {
-        gain.gain.value = gain.gain.value == 0 ? this.volume : 0
+        this.gainNode.gain.value = this.gainNode.gain.value == 0 ? this.volume : 0
         this.color = this.color == "white" ? this.originalColor : "white";
     }
 
@@ -165,6 +157,7 @@ class GamePiece {
             let startTouchX = e.touches[0].clientX;
             let startTouchY = e.touches[0].clientY;
             window.ontouchmove = (f) => {
+                 f.preventDefault();
                  let moveTouchX = f.touches[0].clientX;
                  let moveTouchY = f.touches[0].clientY;
                  xDelta = moveTouchX > startTouchX ? moveTouchX - startTouchX : startTouchX - moveTouchX
