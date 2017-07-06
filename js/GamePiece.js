@@ -167,7 +167,7 @@ class GamePiece {
                  else{
                    this.direction = moveTouchY > startTouchY ? 0 : 180
                  }
-                 f.preventDefault();
+              //   f.preventDefault();
             }
         }
 }
