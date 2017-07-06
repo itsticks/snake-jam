@@ -159,15 +159,15 @@ class GamePiece {
             window.ontouchmove = (f) => {
                  let moveTouchX = f.touches[0].clientX;
                  let moveTouchY = f.touches[0].clientY;
-                 xDelta = moveTouchX > startTouchX ? moveTouchX - startTouchX : startTouchX - moveTouchX
-                 yDelta = moveTouchY > startTouchY ? moveTouchY - startTouchY : startTouchY - moveTouchY
+                 let xDelta = moveTouchX > startTouchX ? moveTouchX - startTouchX : startTouchX - moveTouchX
+                 let yDelta = moveTouchY > startTouchY ? moveTouchY - startTouchY : startTouchY - moveTouchY
                  if(xDelta>yDelta){
                    this.direction = moveTouchX > startTouchX ? 90 : 270
                  }
                  else{
                    this.direction = moveTouchY > startTouchY ? 0 : 180
                  }
-              //   f.preventDefault();
+                 f.preventDefault();
             }
         }
 }
