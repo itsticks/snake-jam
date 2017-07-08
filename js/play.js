@@ -4,6 +4,7 @@ const directions = [0,90,180,270];
 const speeds = [1,2,4];
 var points = 0, count = 0;
 var indexToSplice = 0;
+var speedResetOn = false;
 
 function randomItem(array) {
     	return array[Math.floor(Math.random()*array.length)]
@@ -20,10 +21,11 @@ var update = () => {
 	        x.forward();
 	        if(count%(10-x.speed)===0&&x.harmful){x.pulse()}
 	        if(x!=gamePieces[0] && gamePieces[0].hasCollided(x)){
-	 if(gamePieces.length%5==0){
+	 if(points%100==0 && !speedResetOn){
 		gamePieces.push(new SpeedReset(grid));
 			gamePieces[gamePieces.length-1].direction = randomItem(directions)
 			gamePieces[gamePieces.length-1].speed = randomItem(speeds)
+			speedResetOn = true;
 	}
 	        	let currentShape = gamePieces[0].shape;
 	        	let currentColor = gamePieces[0].color;
@@ -71,7 +73,7 @@ var update = () => {
 		    }	
 	        x.drawMe(grid);
 	    });
-	if(indexToSplice!=0){gamePieces.splice(indexToSplice,1);}
+	if(indexToSplice!=0){gamePieces.splice(indexToSplice,1);speedResetOn=false;}
 	window.requestAnimationFrame(update)
 	count++;
 }
