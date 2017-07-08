@@ -26,16 +26,29 @@ var update = () => {
 				}
 				else if(x.speedReset){
 					gamePieces[0].speed = 4;
+					let currentIndex = gamePieces.indexOf(x);
+					gamePieces.splice(currentIndex,1);
 				}
 				else{
 				    points = points + 10;
 				    grid.drawScores(points);
-				    if(count%2==0){
-				    gamePieces.push(new Sawtooth(grid));
-				    gamePieces[gamePieces.length-1].direction = randomItem(directions);
-				    gamePieces[gamePieces.length-1].speed = randomItem(speeds);
+				    if(x.sizer =="up"){
+					gamePieces[0].height = gamePieces[0].height + 1;
+					gamePieces[0].width = gamePieces[0].width + 1;
+
 				}
-				else{gamePieces[0].speed = gamePieces[0].speed + 1;}
+				else if (x.sizer=="down"){
+					gamePieces[0].height = gamePieces[0].height - 1;
+					gamePieces[0].width = gamePieces[0].width - 1;
+				}
+				    if(count%2==0){
+				        gamePieces.push(new Sawtooth(grid));
+				        gamePieces[gamePieces.length-1].direction = randomItem(directions);
+				        gamePieces[gamePieces.length-1].speed = randomItem(speeds);
+				    }
+				    else {
+				    	gamePieces[0].speed = gamePieces[0].speed + 1;
+				    }
 				}
 
 				gamePieces[0].changeShape(x.shape);

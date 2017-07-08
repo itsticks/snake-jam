@@ -5,5 +5,7 @@ class Triangle extends GamePiece {
     this.originalColor = '#ff0000';
     this.speed = 4;
     this.shape = "triangle";
+        this.sizer = 'down';
+
 	}
 }
