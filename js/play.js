@@ -10,7 +10,11 @@ function randomItem(array) {
 
 var update = () => {
 	if(count==1){grid.drawScores(points);}
-	if(gamePieces.length%10==0){gamePieces.push(new SpeedReset(grid))}
+	if(gamePieces.length%10==0){
+		gamePieces.push(new SpeedReset(grid));
+			gamePieces[gamePieces.length-1].direction = randomItem(directions)
+			gamePieces[gamePieces.length-1].speed = randomItem(speeds)
+	}
 	gamePieces.forEach(x=>{
 			x.clearMe(grid);
 	        x.forward();
