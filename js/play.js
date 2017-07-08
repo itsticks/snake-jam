@@ -9,7 +9,7 @@ function randomItem(array) {
 }
 
 var update = () => {
-	if(count==1){grid.drawRecordScore(points);}
+	if(count==1){grid.drawScores(points);}
 	gamePieces.forEach(x=>{
 			x.clearMe(grid);
 	        x.forward();
@@ -19,18 +19,20 @@ var update = () => {
 	        	let currentColor = gamePieces[0].color;
 	        	if(x.harmful){
 	        		points = 0;
-				    grid.drawScore("game over");
+				    //grid.drawScore("game over");
 				    canvas.style["background-color"] = "white"
 				    setTimeout(()=>window.location.href = window.location.href,2000);
 				}
 				else{
 				    points = points + 10;
-				    gamePieces[0].speed = gamePieces[0].speed + 1;
+				    grid.drawScores(points);
+				    if(count%2==0){
 				    gamePieces.push(new Sawtooth(grid));
 				    gamePieces[gamePieces.length-1].direction = randomItem(directions);
 				    gamePieces[gamePieces.length-1].speed = randomItem(speeds);
-				    grid.drawScore(points);
-				    grid.drawRecordScore(points);
+				}else{
+									    gamePieces[0].speed = gamePieces[0].speed + 1;
+				}
 				}
 
 				gamePieces[0].changeShape(x.shape);

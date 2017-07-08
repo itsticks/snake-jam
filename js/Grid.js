@@ -15,20 +15,14 @@ class Grid {
 		let randY = Math.floor((Math.random() * this.ctx.canvas.height) + 1)
 		return {x:randX,y:randY}
 	}
-
-	this.drawScore = (x) => {
-		this.ctx.font = "25px Arial"
-		this.ctx.clearRect(this.centreSpot().x-50,this.centreSpot().y-50,150,50)
-		this.ctx.fillText(x,this.centreSpot().x, this.centreSpot().y)
-	}
-		this.drawRecordScore = (x) => {
+	this.drawScores = (x) => {
+		this.ctx.clearRect(0,0,300,300)
+		this.ctx.font = "15px Arial";
+		this.ctx.fillText("score: "+x,10,20)
 		let score = localStorage.highScore!=null && parseInt(localStorage.highScore) > x ? localStorage.highScore : x;  
 		localStorage.highScore = score;
-		this.ctx.font = "25px Arial"
-		this.ctx.clearRect(0,0,300,300)
-		this.ctx.fillText("top score: "+score,50, 50)
+		this.ctx.fillText("best: "+score,10, 32)
 	}
-
 
   }
 }
