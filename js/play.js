@@ -9,7 +9,9 @@ function randomItem(array) {
 }
 
 var update = () => {
-	if(count==1){grid.drawScores(points);}
+	if(count%100==0){
+		grid.drawScores(points);
+	}
 	if(gamePieces.length%10==0){
 		gamePieces.push(new SpeedReset(grid));
 			gamePieces[gamePieces.length-1].direction = randomItem(directions)
