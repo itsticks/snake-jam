@@ -47,6 +47,23 @@ class GamePiece {
         this.color = this.color == "#9064C3" ? this.originalColor : "#9064C3";
     }
 
+    this.invertDirection = () => {
+        switch(this.direction) {
+        case 0:
+            this.direction = 180;
+            break;
+        case 90:
+            this.direction = 270;
+            break;
+        case 180:
+            this.direction = 0;
+            break;
+        case 270:
+            this.direction = 90;
+            break;
+        }
+    }
+
     this.forward = () => {
         switch(this.direction) {
         case 0:

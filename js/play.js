@@ -20,7 +20,7 @@ var update = () => {
 	        x.forward();
 	        if(count%(10-x.speed)===0&&x.harmful){x.pulse()}
 	        if(x!=gamePieces[0] && gamePieces[0].hasCollided(x)){
-	 if(gamePieces.length%10==0){
+	 if(gamePieces.length%5==0){
 		gamePieces.push(new SpeedReset(grid));
 			gamePieces[gamePieces.length-1].direction = randomItem(directions)
 			gamePieces[gamePieces.length-1].speed = randomItem(speeds)
@@ -35,6 +35,7 @@ var update = () => {
 				}
 				else if(x.speedReset){
 					gamePieces[0].speed = gamePieces[0].speed-randomItem(speeds);
+					gamePieces.forEach(p=>p.invertDirection())
 					indexToSplice = gamePieces.indexOf(x);
 				}
 				else{
