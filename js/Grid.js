@@ -21,7 +21,7 @@ class Grid {
 		this.ctx.fillText("score: "+x,10,20)
 		let score = localStorage.highScore!=null && parseInt(localStorage.highScore) > x ? localStorage.highScore : x;  
 		localStorage.highScore = score;
-		this.ctx.fillText("best: "+score,10, 32)
+		this.ctx.fillText("best: "+score,10, 35)
 	}
 
   }

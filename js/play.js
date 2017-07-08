@@ -3,6 +3,7 @@ const gamePieces = new Array();
 const directions = [0,90,180,270];
 const speeds = [1,2,4];
 var points = 0, count = 0;
+var indexToSplice = 0;
 
 function randomItem(array) {
     	return array[Math.floor(Math.random()*array.length)]
@@ -17,6 +18,7 @@ var update = () => {
 			gamePieces[gamePieces.length-1].direction = randomItem(directions)
 			gamePieces[gamePieces.length-1].speed = randomItem(speeds)
 	}
+	indexToSplice = 0;
 	gamePieces.forEach(x=>{
 			x.clearMe(grid);
 	        x.forward();
@@ -28,12 +30,11 @@ var update = () => {
 	        		points = 0;
 				    //grid.drawScore("game over");
 				    canvas.style["background-color"] = "white"
-				    setTimeout(()=>window.location.href = window.location.href,2000);
+				    setTimeout(()=>window.location.href = window.location.href,5000);
 				}
 				else if(x.speedReset){
-					gamePieces[0].speed = 4;
-					let currentIndex = gamePieces.indexOf(x);
-					gamePieces.splice(currentIndex,1);
+					gamePieces[0].speed = gamePieces[0].speed-randomItem(speeds);
+					var indexToSplice = gamePieces.indexOf(x);
 				}
 				else{
 				    points = points + 10;
@@ -68,6 +69,7 @@ var update = () => {
 		    }	
 	        x.drawMe(grid);
 	    });
+	if(indexToSplice!=0){gamePieces.splice(currentIndex,1);}
 	window.requestAnimationFrame(update)
 	count++;
 }
