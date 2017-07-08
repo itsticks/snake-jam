@@ -32,12 +32,12 @@ var update = () => {
 				else{
 				    points = points + 10;
 				    grid.drawScores(points);
-				    if(x.sizer =="up"){
+				    if(x.color =="#00ff00"){
 					gamePieces[0].height = gamePieces[0].height + 1;
 					gamePieces[0].width = gamePieces[0].width + 1;
 
 				}
-				else if (x.sizer=="down"){
+				else if (x.color=="#ff0000" && gamePieces[0].height > 5){
 					gamePieces[0].height = gamePieces[0].height - 1;
 					gamePieces[0].width = gamePieces[0].width - 1;
 				}
