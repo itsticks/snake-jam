@@ -17,7 +17,7 @@ function makeDistortionCurve(amount) {
 class GamePiece {
     constructor(grid) {
     this.grid = grid;
-    this.harmful = false;
+    this.on = true;
     this.x = grid.randomSpot().x;
     this.y = grid.randomSpot().y;
     this.width = 10;
@@ -108,6 +108,15 @@ class GamePiece {
         let r1Top = this.y, r1Right = this.x + this.width, r1Bottom = this.y+this.height, r1Left = this.x;
         let r2Top = piece.y, r2Right = piece.x + piece.width, r2Bottom = piece.y + piece.height, r2Left = piece.x; 
         return !(r2Left > r1Right || r2Right < r1Left || r2Top > r1Bottom || r2Bottom < r1Top)
+    }
+
+    this.collide = (piece) => {
+        let precedent = this.collisionIndex*this.speed > piece.collisionIndex*piece.speed ? this : piece;
+        precedent.collision();
+    }
+
+    this.collision = (piece) => {
+        piece.on = false;
     }
 
     this.drawMe = () => {
