@@ -1,14 +1,15 @@
 {
   "short_name": "snake jam",
   "name": "snake jam",
+  "theme_color": "#2196F3",
   "icons": [
     {
       "src": "icon.png",
-      "sizes": "96x96",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "start_url": "/index.html",
+  "start_url": "index.html",
   "display": "standalone",
   "orientation": "landscape"
 }
