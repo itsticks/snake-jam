@@ -15,14 +15,14 @@ var update = () => {
 	        	let currentShape = gamePieces[0].shape
 	        	let currentColor = gamePieces[0].color
 	        	if(x.harmful){
-				    canvas.style["background-color"] = "#ff2222"
-				    setTimeout(()=>window.location.href = window.location.href,5000)
+				    canvas.style["background-color"] = "silver"
+				    setTimeout(()=>window.location.href = window.location.href,3000)
 				}
 				else if(x.speedReset){
 					gamePieces[0].speed = gamePieces[0].speed > 8 ? gamePieces[0].speed-randomItem(speeds) : gamePieces[0].speed
 					gamePieces.forEach((p,i)=>{if(i!=0){p.invertDirection()}})
 					gamePieces[4].on = false
-					points = points + 15
+					points = points + 20
 				}
 				else{
 				    points = points + 10
