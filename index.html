@@ -2,6 +2,7 @@
 
 <head>
 <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2196F3">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 <title>snake jam</title>
@@ -31,7 +32,7 @@ canvas#canvas {background:#000000; touch-action: none;}
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+    navigator.serviceWorker.register('service-worker.js').then(function(registration) {
       // Registration was successful
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
     }, function(err) {

@@ -1,7 +1,7 @@
 {
   "short_name": "snake jam",
   "name": "snake jam",
-  "theme_color": "#2196F3",
+  "background_color": "#2196F3",
   "icons": [
     {
       "src": "icon.png",
