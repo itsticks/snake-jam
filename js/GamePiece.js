@@ -81,7 +81,7 @@ class GamePiece {
         }
         this.checkWall(grid);
         this.oscillator.frequency.value = this.y;
-        this.distortion.curve = makeDistortionCurve(this.x);
+       // this.distortion.curve = makeDistortionCurve(this.x);
     }
 
     this.checkWall = (canvas) => {
