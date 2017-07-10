@@ -2,7 +2,7 @@
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var audioCtx = new AudioContext() || window.webkitAudioContext;
+var audioCtx = new AudioContext() || new window.webkitAudioContext();
 
 function makeDistortionCurve(amount) {
     var k = typeof amount === 'number' ? amount : 50,
