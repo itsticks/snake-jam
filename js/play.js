@@ -16,6 +16,7 @@ var update = () => {
 	        	let currentColor = gamePieces[0].color
 	        	if(x.harmful){
 				    canvas.style["background-color"] = "silver"
+				    grid.drawMessage("you died!");
 				    setTimeout(()=>window.location.href = window.location.href,3000)
 				}
 				else if(x.speedReset){

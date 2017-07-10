@@ -105,9 +105,12 @@ class GamePiece {
     }
 
     this.hasCollided = (piece) => {
+        if(piece.on){
         let r1Top = this.y, r1Right = this.x + this.width, r1Bottom = this.y+this.height, r1Left = this.x;
         let r2Top = piece.y, r2Right = piece.x + piece.width, r2Bottom = piece.y + piece.height, r2Left = piece.x; 
         return !(r2Left > r1Right || r2Right < r1Left || r2Top > r1Bottom || r2Bottom < r1Top)
+        }
+        return false;
     }
 
     this.collide = (piece) => {

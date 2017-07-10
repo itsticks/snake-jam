@@ -24,5 +24,12 @@ class Grid {
 		this.ctx.fillText("best: "+score,10, 35)
 	}
 
+	this.drawMessage = (msg) => {
+		this.ctx.font = "25px Arial"
+		this.ctx.clearRect(this.centreSpot().x-50,this.centreSpot().y-50,150,50)
+		this.ctx.fillText(msg,this.centreSpot().x, this.centreSpot().y)
+	}
+
   }
 }
+
