@@ -2,7 +2,7 @@
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var audioCtx = new AudioContext();
+var audioCtx = new AudioContext() || window.webkitAudioContext;
 
 function makeDistortionCurve(amount) {
     var k = typeof amount === 'number' ? amount : 50,
@@ -481,7 +481,7 @@ var directions = [0, 90, 180, 270];
 var speeds = [1, 2, 4];
 var points = 0,
     count = 0;
-var fps = 30;
+var fps = 1;
 var now;
 var then = Date.now();
 var interval = 1000 / fps;
