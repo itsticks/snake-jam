@@ -200,6 +200,8 @@ class GamePiece {
                  f.preventDefault();
             }
         }
+
+        document.addEventListener('gesturestart', (e) => e.preventDefault())
 }
 
 }

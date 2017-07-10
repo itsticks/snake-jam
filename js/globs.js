@@ -209,6 +209,10 @@ var GamePiece = function GamePiece(grid) {
                 f.preventDefault();
             };
         };
+
+        document.addEventListener('gesturestart', function (e) {
+            return e.preventDefault();
+        });
     };
 };
 "use strict";
