@@ -7,7 +7,7 @@
     "transpile": "./node_modules/.bin/babel --presets es2015,stage-0 -d js/build js/src",
     "concat": "concat-glob-cli --files js/build/**/*.js js/build/*.js --output js/globs.js",
     "compress": "uglifyjs --compress --output js/globs.min.js -- js/globs.js",
-    "js-watch": "nodemon --watch js/src/ --exec npm run transpile",
+    "js-watch": "nodemon --watch js/src/ --exec npm run transpile && npm run concat && npm run compress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,4 +1,4 @@
-var audioCtx = new AudioContext;
+var audioCtx = new AudioContext || window.webkitAudioContext;
 
 function makeDistortionCurve(amount) {
   var k = typeof amount === 'number' ? amount : 50,

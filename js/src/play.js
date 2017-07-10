@@ -3,6 +3,9 @@ function randomItem(array) {
 }
 
 var update = () => {
+    now = Date.now();
+    delta = now - then;
+if(delta>interval){
 	if(count%50==0 || count == 1){
 		grid.drawScores(points)
 	}
@@ -59,7 +62,9 @@ var update = () => {
 	        if(x.on){x.drawMe(grid)}
 	    });
 	count++
+}
 	window.requestAnimationFrame(update)
+
 }
 
 
@@ -68,6 +73,11 @@ var gamePieces = new Array()
 const directions = [0,90,180,270]
 const speeds = [1,2,4]
 var points = 0, count = 0
+var fps = 1
+var now
+var then = Date.now()
+var interval = 1000/fps
+var delta
 
 gamePieces.push(new Sine(grid))
 gamePieces[0].x = grid.centreSpot().x
