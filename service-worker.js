@@ -3,14 +3,7 @@ self.addEventListener('install', function(event) {
     caches.open('v1').then(function(cache) {
       return cache.addAll([
         'index.html',
-        'js/Grid.js',
-        'js/play.js',
-        'js/GamePiece.js',
-        'js/GamePieces/Sawtooth.js',
-        'js/GamePieces/Sine.js',
-        'js/GamePieces/SpeedReset.js',
-        'js/GamePieces/Square.js',
-        'js/GamePieces/Triangle.js'
+        'js/globs.min.js',
       ]);
     })
   );

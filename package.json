@@ -1,0 +1,36 @@
+{
+  "name": "snake-jam",
+  "version": "1.0.0",
+  "description": "canvas game",
+  "main": "index.html",
+  "scripts": {
+    "transpile": "./node_modules/.bin/babel --presets es2015,stage-0 -d js/build js/src",
+    "concat": "concat-glob-cli --files js/build/**/*.js js/build/*.js --output js/globs.js",
+    "compress": "uglifyjs --compress --output js/globs.min.js -- js/globs.js",
+    "js-watch": "nodemon --watch js/src/ --exec npm run transpile",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsticks/snake-jam.git"
+  },
+  "keywords": [
+    "html5"
+  ],
+  "author": "Rob Alexander",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsticks/snake-jam/issues"
+  },
+  "homepage": "https://itsticks.github.io/snake-jam/",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "concat": "^1.0.3",
+    "concat-cli": "^4.0.0",
+    "concat-glob-cli": "^0.1.0",
+    "nodemon": "^1.11.0",
+    "uglify-js": "^3.0.16"
+  }
+}
