@@ -26,8 +26,8 @@ canvas#canvas {background:#000000; touch-action: none;}
 <script src="js/globs.min.js"></script>
 
 <script>
-//const main = document.getElementById("main");
-const p = main.getElementsByTagName("p")[0];
+var mainElement = document.getElementById("main");
+var p = mainElement.getElementsByTagName("p")[0];
 p.style.display="none"
 
 if ('serviceWorker' in navigator) {

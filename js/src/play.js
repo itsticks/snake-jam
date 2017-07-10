@@ -73,7 +73,7 @@ var gamePieces = new Array()
 const directions = [0,90,180,270]
 const speeds = [1,2,4]
 var points = 0, count = 0
-var fps = 1
+var fps = 30
 var now
 var then = Date.now()
 var interval = 1000/fps
