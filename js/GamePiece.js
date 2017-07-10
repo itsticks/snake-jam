@@ -33,13 +33,13 @@ class GamePiece {
     // this.convolver = audioCtx.createConvolver();
     this.gainNode = audioCtx.createGain();
     this.gainNode.gain.value = this.volume;
-    this.distortion = audioCtx.createWaveShaper();
-    this.distortion.wave = makeDistortionCurve(this.x*10);
+   // this.distortion = audioCtx.createWaveShaper();
+   // this.distortion.wave = makeDistortionCurve(this.x*10);
     this.oscillator = audioCtx.createOscillator();
     this.oscillator.start(0);
     this.oscillator.frequency.value = this.y;
-    this.oscillator.connect(this.distortion);
-    this.distortion.connect(this.gainNode);
+    this.oscillator.connect(this.gainNode);
+   // this.distortion.connect(this.gainNode);
     this.gainNode.connect(audioCtx.destination);  
 
     this.pulse = () => {
@@ -185,8 +185,8 @@ class GamePiece {
             window.ontouchmove = (f) => {
                  let moveTouchX = f.touches[0].clientX;
                  let moveTouchY = f.touches[0].clientY;
-                 let xDelta = moveTouchX > startTouchX ? moveTouchX - startTouchX : startTouchX - moveTouchX
-                 let yDelta = moveTouchY > startTouchY ? moveTouchY - startTouchY : startTouchY - moveTouchY
+                    let xDelta = Math.abs(startTouchX - moveTouchX);
+                 let yDelta = Math.abs(startTouchY - moveTouchY);
                  if(xDelta>yDelta) {
                    this.direction = moveTouchX > startTouchX ? 90 : 270
                  }

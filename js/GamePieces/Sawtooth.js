@@ -23,7 +23,6 @@ class Sawtooth extends GamePiece {
         }
         this.checkWall(grid);
         this.oscillator.frequency.value = this.x/2;
-        this.distortion.curve = makeDistortionCurve(this.y*10);
     }
 }
 }
