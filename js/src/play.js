@@ -1,33 +1,31 @@
 var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
                             window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
-
 var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame
 
 function randomItem(array) {
     	return array[Math.floor(Math.random()*array.length)]
 }
 
-
-
 var update = () => {
-    now = Date.now();
-    delta = now - then;
-if(delta>interval){
 	if(count%50==0 || count == 1){
 		grid.drawScores(points)
 	}
 	gamePieces.forEach(x=>{
-			x.clearMe(grid)
-			if(x.on){x.forward()}
-	       // if(count%(10-x.speed)===0&&x.harmful){x.pulse()}
+			if(x.on){x.clearMe(grid);x.forward()}
+	        if(count%(10-x.speed)===0&&x.harmful){x.pulse()}
 	        if(x!=gamePieces[0] && gamePieces[0].hasCollided(x)){
 	 		    gamePieces[4].on = points % 50 == 0 ? true : false
 	        	let currentShape = gamePieces[0].shape
 	        	let currentColor = gamePieces[0].color
 	        	if(x.harmful){
 				    canvas.style["background-color"] = "silver"
-				    grid.drawMessage("you died!");
-				    setTimeout(()=>window.location.href = window.location.href,3000)
+				    grid.drawMessage("game over");
+				    audioCtx.close()
+				    audioCtx = new AudioContext
+				    cancelAnimationFrame(myReq)
+				    myReq = 0
+				    grid.clearMe()
+				    setTimeout(()=>{startGame();canvas.style["background-color"] = "black"},3000)
 				}
 				else if(x.speedReset){
 					gamePieces[0].speed = gamePieces[0].speed > 8 ? gamePieces[0].speed-randomItem(speeds) : gamePieces[0].speed
@@ -46,7 +44,7 @@ if(delta>interval){
 					else if (x.color=="#ff0000" && gamePieces[0].height > 5){
 						gamePieces[0].height = gamePieces[0].height - 1
 						gamePieces[0].width = gamePieces[0].width - 1
-				}
+				    }
 				    if(count%2==0){
 				        gamePieces.push(new Sawtooth(grid));
 				        gamePieces[gamePieces.length-1].direction = randomItem(directions)
@@ -56,7 +54,7 @@ if(delta>interval){
 				    	gamePieces[0].speed = gamePieces[0].speed + 1
 				    }
 				}
-
+				x.clearMe(grid)
 				gamePieces[0].changeShape(x.shape)
 				x.changeShape(currentShape)
 	
@@ -69,24 +67,16 @@ if(delta>interval){
 	        if(x.on){x.drawMe(grid)}
 	    });
 	count++
-}
 	myReq = requestAnimationFrame(update)
 
 }
 
-
-const grid = new Grid(document.getElementById('canvas'))
-var gamePieces = new Array()
-const directions = [0,90,180,270]
-const speeds = [1,2,4]
-var points = 0, count = 0
-var fps = 30
-var now
-var then = Date.now()
-var interval = 1000/fps
-var delta
-var myReq
-var paused = true
+const startGame = () => {
+gamePieces = new Array()
+points = 0
+paused = true
+count = 0
+grid.clearMe()
 
 gamePieces.push(new Sine(grid))
 gamePieces[0].x = grid.centreSpot().x
@@ -99,21 +89,43 @@ gamePieces.push(new Triangle(grid))
 gamePieces.push(new SpeedReset(grid))
 gamePieces[gamePieces.length-1].on = false
 
-
 gamePieces.filter((x,i)=>i!=0).forEach(x=>{
 	x.direction = randomItem(directions)
 	x.speed = randomItem(speeds)
 })
 
-         myReq = requestAnimationFrame(update)
+grid.drawMessage("space to start")
 
-	// document.body.onkeyup = function(e){
- //    if(e.keyCode == 32 && paused){
- //        myReq = requestAnimationFrame(update)
- //        paused = false
- //    }
- //    else if(e.keyCode == 32 && !paused){
- //    	cancelAnimationFrame(myReq)
- //    	paused = true
- //    }
-//}
+cancelAnimationFrame(myReq)
+mute()
+
+}
+
+document.body.onkeyup = function(e){
+    if(e.keyCode == 32 && paused){
+        myReq = requestAnimationFrame(update)
+        unmute()
+        paused = false
+        grid.ctx.clearRect(grid.centreSpot().x-50,grid.centreSpot().y-50,550,50)
+    }
+    else if(e.keyCode == 32 && !paused){
+    	cancelAnimationFrame(myReq)
+    	mute()
+    	paused = true
+    }
+}
+
+const grid = new Grid(document.getElementById('canvas'))
+const directions = [0,90,180,270]
+const speeds = [1,2,4]
+var gamePieces = new Array()
+var points = 0
+var paused = true
+var myReq
+var count = 0
+
+const mute = () => gamePieces.forEach(x=>x.gainNode.disconnect(audioCtx.destination))
+const unmute = () => gamePieces.forEach(x=>x.gainNode.connect(audioCtx.destination))
+
+
+startGame();

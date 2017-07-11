@@ -16,6 +16,7 @@ class Grid {
 		return {x:randX,y:randY}
 	}
 	this.drawScores = (x) => {
+		this.ctx.fillStyle = "white"
 		this.ctx.clearRect(0,0,300,300)
 		this.ctx.font = "15px Arial";
 		this.ctx.fillText("score: "+x,10,20)
@@ -25,9 +26,14 @@ class Grid {
 	}
 
 	this.drawMessage = (msg) => {
+		this.ctx.fillStyle = "white"
 		this.ctx.font = "25px Arial"
-		this.ctx.clearRect(this.centreSpot().x-50,this.centreSpot().y-50,150,50)
+        this.ctx.clearRect(grid.centreSpot().x-50,grid.centreSpot().y-50,550,50)
 		this.ctx.fillText(msg,this.centreSpot().x, this.centreSpot().y)
+	}
+
+	this.clearMe = () => {
+		this.ctx.clearRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height)
 	}
 
   }
