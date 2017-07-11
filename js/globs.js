@@ -408,6 +408,10 @@ var Grid = function Grid(canvasElement) {
 };
 "use strict";
 
+var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+
 function randomItem(array) {
 	return array[Math.floor(Math.random() * array.length)];
 }
@@ -477,7 +481,7 @@ var update = function update() {
 		});
 		count++;
 	}
-	window.requestAnimationFrame(update);
+	myReq = requestAnimationFrame(update);
 };
 
 var grid = new Grid(document.getElementById('canvas'));
@@ -491,6 +495,8 @@ var now;
 var then = Date.now();
 var interval = 1000 / fps;
 var delta;
+var myReq;
+var paused = true;
 
 gamePieces.push(new Sine(grid));
 gamePieces[0].x = grid.centreSpot().x;
@@ -510,4 +516,15 @@ gamePieces.filter(function (x, i) {
 	x.speed = randomItem(speeds);
 });
 
-window.requestAnimationFrame(update);
+myReq = requestAnimationFrame(update);
+
+// document.body.onkeyup = function(e){
+//    if(e.keyCode == 32 && paused){
+//        myReq = requestAnimationFrame(update)
+//        paused = false
+//    }
+//    else if(e.keyCode == 32 && !paused){
+//    	cancelAnimationFrame(myReq)
+//    	paused = true
+//    }
+//}

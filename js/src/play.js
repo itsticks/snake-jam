@@ -1,6 +1,13 @@
+var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                            window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
+
+var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame
+
 function randomItem(array) {
     	return array[Math.floor(Math.random()*array.length)]
 }
+
+
 
 var update = () => {
     now = Date.now();
@@ -63,7 +70,7 @@ if(delta>interval){
 	    });
 	count++
 }
-	window.requestAnimationFrame(update)
+	myReq = requestAnimationFrame(update)
 
 }
 
@@ -78,6 +85,8 @@ var now
 var then = Date.now()
 var interval = 1000/fps
 var delta
+var myReq
+var paused = true
 
 gamePieces.push(new Sine(grid))
 gamePieces[0].x = grid.centreSpot().x
@@ -96,6 +105,15 @@ gamePieces.filter((x,i)=>i!=0).forEach(x=>{
 	x.speed = randomItem(speeds)
 })
 
+         myReq = requestAnimationFrame(update)
 
-
-window.requestAnimationFrame(update)
+	// document.body.onkeyup = function(e){
+ //    if(e.keyCode == 32 && paused){
+ //        myReq = requestAnimationFrame(update)
+ //        paused = false
+ //    }
+ //    else if(e.keyCode == 32 && !paused){
+ //    	cancelAnimationFrame(myReq)
+ //    	paused = true
+ //    }
+//}
