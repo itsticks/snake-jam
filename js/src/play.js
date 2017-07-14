@@ -94,7 +94,7 @@ gamePieces.filter((x,i)=>i!=0).forEach(x=>{
 	x.speed = randomItem(speeds)
 })
 
-grid.drawMessage("space to start")
+grid.drawMessage("use arrow keys")
 
 cancelAnimationFrame(myReq)
 mute()
@@ -102,7 +102,7 @@ mute()
 }
 
 document.body.onkeyup = function(e){
-    if(e.keyCode == 32 && paused){
+    if(paused){
         myReq = requestAnimationFrame(update)
         unmute()
         paused = false
@@ -112,6 +112,15 @@ document.body.onkeyup = function(e){
     	cancelAnimationFrame(myReq)
     	mute()
     	paused = true
+    }
+}
+
+document.body.ontouchstart = function(){
+	    if(paused){
+        myReq = requestAnimationFrame(update)
+        unmute()
+        paused = false
+        grid.ctx.clearRect(grid.centreSpot().x-50,grid.centreSpot().y-50,550,50)
     }
 }
 
