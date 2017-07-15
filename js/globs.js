@@ -544,6 +544,13 @@ document.body.ontouchstart = function () {
 	}
 };
 
+window.onblur = function () {
+	console.log("blurring");
+	cancelAnimationFrame(myReq);
+	mute();
+	paused = true;
+};
+
 var grid = new Grid(document.getElementById('canvas'));
 var directions = [0, 90, 180, 270];
 var speeds = [1, 2, 4];

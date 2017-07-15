@@ -124,6 +124,13 @@ document.body.ontouchstart = function(){
     }
 }
 
+window.onblur = function() {
+	console.log("blurring")
+		cancelAnimationFrame(myReq)
+    	mute()
+    	paused = true
+}
+
 const grid = new Grid(document.getElementById('canvas'))
 const directions = [0,90,180,270]
 const speeds = [1,2,4]
