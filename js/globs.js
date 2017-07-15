@@ -357,8 +357,8 @@ var Triangle = function (_GamePiece) {
 
         var _this = _possibleConstructorReturn(this, (Triangle.__proto__ || Object.getPrototypeOf(Triangle)).call(this, grid));
 
-        _this.color = "#ff0000";
-        _this.originalColor = '#ff0000';
+        _this.color = "#ff2222";
+        _this.originalColor = '#ff2222';
         _this.shape = "triangle";
         _this.sizer = 'down';
 
