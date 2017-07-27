@@ -438,7 +438,7 @@ var update = function update() {
 			var currentColor = gamePieces[0].color;
 			if (x.harmful) {
 				canvas.style["background-color"] = "silver";
-				grid.drawMessage("game over");
+				grid.drawMessage("end game");
 				audioCtx.close();
 				audioCtx = new AudioContext();
 				cancelAnimationFrame(myReq);
