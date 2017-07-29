@@ -14,7 +14,7 @@ self.addEventListener('fetch', function(event) {
     caches.match(event.request)
       .then(function(response) {
         // Cache hit - return response
-        if (response) {
+        if (response) { 
           return response;
         }
         return fetch(event.request);
@@ -23,4 +23,4 @@ self.addEventListener('fetch', function(event) {
   );
 });
 
-//touch123
+//touch1234

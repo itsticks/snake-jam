@@ -18,8 +18,8 @@ var update = () => {
 	        	let currentShape = gamePieces[0].shape
 	        	let currentColor = gamePieces[0].color
 	        	if(x.harmful){
-				    canvas.style["background-color"] = "silver"
-				    grid.drawMessage("end game");
+				    canvas.style["background-color"] = "#55ee22";
+				    grid.drawMessage("end game")
 				    audioCtx.close()
 				    audioCtx = new AudioContext
 				    cancelAnimationFrame(myReq)
