@@ -22,7 +22,7 @@ var update = () => {
 				    grid.drawMessage("end game")
 				    audioCtx.close()
 				    audioCtx = new AudioContext
-				    cancelAnimationFrame(myReq)
+				    cancelAnimationFrame(myReq+1)
 				    myReq = 0
 				    grid.clearMe()
 				    setTimeout(()=>{startGame();canvas.style["background-color"] = "black"},3000)
