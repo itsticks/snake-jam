@@ -94,7 +94,7 @@ gamePieces.filter((x,i)=>i!=0).forEach(x=>{
 	x.speed = randomItem(speeds)
 })
 
-grid.drawMessage("use arrow keys")
+grid.drawMessage("Snake Jam")
 
 cancelAnimationFrame(myReq)
 mute()

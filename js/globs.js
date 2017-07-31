@@ -516,7 +516,7 @@ var startGame = function startGame() {
 		x.speed = randomItem(speeds);
 	});
 
-	grid.drawMessage("use arrow keys");
+	grid.drawMessage("Snake Jam");
 
 	cancelAnimationFrame(myReq);
 	mute();
