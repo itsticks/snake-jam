@@ -527,7 +527,7 @@ document.body.onkeyup = function (e) {
 		myReq = requestAnimationFrame(update);
 		unmute();
 		paused = false;
-		grid.ctx.clearRect(grid.centreSpot().x - 50, grid.centreSpot().y - 50, 550, 50);
+		grid.ctx.clearRect(grid.centreSpot().x - 50, grid.centreSpot().y - 50, 550, 100);
 	} else if (e.keyCode == 32 && !paused) {
 		cancelAnimationFrame(myReq);
 		mute();
