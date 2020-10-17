@@ -7,7 +7,6 @@ function randomItem(array) {
 }
 
 
-
 var update = () => {
 	if(count%50==0 || count == 1){
 		grid.drawScores(points)
@@ -146,8 +145,9 @@ var paused = true
 var myReq
 var count = 0
 
-const mute = () => gamePieces.forEach(x=>x.gainNode.disconnect(audioCtx.destination))
-const unmute = () => gamePieces.forEach(x=>x.gainNode.connect(audioCtx.destination))
+
+const mute = () => gamePieces.forEach(x=>x.disconnectGain())
+const unmute = () => gamePieces.forEach(x=>x.connectGain())
 
 
 startGame();

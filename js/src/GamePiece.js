@@ -1,5 +1,5 @@
 var AudioContext = window.AudioContext || window.webkitAudioContext
-var audioCtx = new AudioContext;
+var audioCtx =  new AudioContext;
 
 function makeDistortionCurve(amount) {
   var k = typeof amount === 'number' ? amount : 50,
@@ -59,6 +59,14 @@ class GamePiece {
         let displacementPercent = parseFloat(displacementFromPlayerPiece) / parseFloat(possibleDisplacement);
         let newGain = this.maxVolume - parseFloat(this.maxVolume * displacementPercent) ?? 0;
         this.gainNode.gain.value = newGain;
+     }
+
+     this.disconnectGain = ()=>{
+        this.gainNode.disconnect(audioCtx.destination)
+     }
+
+     this.connectGain = ()=>{
+        this.gainNode.connect(audioCtx.destination)
      }
 
     this.invertDirection = () => {
