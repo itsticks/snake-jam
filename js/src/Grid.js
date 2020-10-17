@@ -4,11 +4,20 @@ class Grid {
 	this.ctx.canvas.width = window.innerWidth
 	this.ctx.canvas.height = window.innerHeight
 
+	this.totalDisplacement = () => {
+		let a = {x:0,y:0};
+		let b = {x:this.ctx.canvas.width,y:this.ctx.canvas.height};
+		let h = Math.abs(a.x - b.x);
+		let v = Math.abs(a.y - b.y);
+		return Math.sqrt(h^2 + v^2);
+	}
+	;
 	this.centreSpot = () => {
 		let midX = this.ctx.canvas.width / 2;
         let midY = this.ctx.canvas.height / 2; 
         return {x:midX,y:midY}
 	}
+
 
 	this.randomSpot = () => {
 		let randX = Math.floor((Math.random() * this.ctx.canvas.width) + 1)

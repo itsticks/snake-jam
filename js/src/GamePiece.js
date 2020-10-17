@@ -27,8 +27,11 @@ class GamePiece {
     this.originalColor = '#ffffff';
     this.shape = "circle";
     this.direction = 0;
+    this.size = 0;
+    this.children = [];
     this.speed = 4;
-    this.volume = 0.01;
+    this.volume = 0.10;
+    this.maxVolume = 0.10
     // this.analyser = audioCtx.createAnalyser();
     // this.biquadFilter = audioCtx.createBiquadFilter();
     // this.convolver = audioCtx.createConvolver();
@@ -44,9 +47,19 @@ class GamePiece {
     this.gainNode.connect(audioCtx.destination);  
 
     this.pulse = () => {
-        this.gainNode.gain.value = this.gainNode.gain.value == 0 ? this.volume : 0
+        //this.gainNode.gain.value = this.gainNode.gain.value == 0 ? this.volume : 0
         this.color = this.color == "#9064C3" ? this.originalColor : "#9064C3";
     }
+
+     this.setVolume = (playerPiece) => {
+        let h = Math.abs(this.x - playerPiece.x);
+        let v  = Math.abs(this.y - playerPiece.y);
+        let displacementFromPlayerPiece = Math.sqrt(h^2 + v^2);
+        let possibleDisplacement = this.grid.totalDisplacement();
+        let displacementPercent = parseFloat(displacementFromPlayerPiece) / parseFloat(possibleDisplacement);
+        let newGain = this.maxVolume - parseFloat(this.maxVolume * displacementPercent) ?? 0;
+        this.gainNode.gain.value = newGain;
+     }
 
     this.invertDirection = () => {
         switch(this.direction) {

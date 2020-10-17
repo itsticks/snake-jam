@@ -6,11 +6,16 @@ function randomItem(array) {
     	return array[Math.floor(Math.random()*array.length)]
 }
 
+
+
 var update = () => {
 	if(count%50==0 || count == 1){
 		grid.drawScores(points)
 	}
 	gamePieces.forEach(x=>{
+		if(x!=gamePieces[0]){
+			x.setVolume(gamePieces[0]);
+		}
 			if(x.on){x.clearMe(grid);x.forward()}
 	        if(count%(10-x.speed)===0&&x.harmful){x.pulse()}
 	        if(x!=gamePieces[0] && gamePieces[0].hasCollided(x)){
@@ -34,7 +39,8 @@ var update = () => {
 					points = points + 20
 				}
 				else{
-				    points = points + 10
+					points = points + 10
+					gamePieces[0].size = gamePieces[0].size+1;
 				    grid.drawScores(points)
 				    if(x.color =="#00ff00"){
 						gamePieces[0].height = gamePieces[0].height + 1
